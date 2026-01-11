@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpsLabSystems.cloud | Modern Staff Management Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-pink: #ec4899;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(255,255,255,0.08);
+            --glow-blue: rgba(59, 130, 246, 0.4);
+            --glow-purple: rgba(139, 92, 246, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -200px;
+            right: -100px;
+            background: var(--accent-blue);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-glow-2 {
+            bottom: -200px;
+            left: -100px;
+            background: var(--accent-purple);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px var(--glow-blue);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+        }
+
+        .logo-text span {
+            color: var(--accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            box-shadow: 0 4px 20px var(--glow-blue);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--glow-blue);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            z-index: 1;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero-title .gradient {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.05rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats */
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Features Section */
+        .section {
+            position: relative;
+            padding: 6rem 2rem;
+            z-index: 1;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon.blue { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+        .feature-icon.purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); }
+        .feature-icon.cyan { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); }
+        .feature-icon.green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+        .feature-icon.pink { background: rgba(236, 72, 153, 0.15); color: var(--accent-pink); }
+        .feature-icon.orange { background: rgba(249, 115, 22, 0.15); color: #f97316; }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Screenshots Section */
+        .screenshots-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .screenshot-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .screenshot-tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .screenshot-tab:hover,
+        .screenshot-tab.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        .screenshot-display {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        .screenshot-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
+        }
+
+        .screenshot-display::after {
+            content: '● ● ●';
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            z-index: 11;
+        }
+
+        .screenshot-img {
+            width: 100%;
+            display: block;
+            transition: opacity 0.5s ease;
+        }
+
+        .screenshot-img.hidden {
+            display: none;
+        }
+
+        /* Carousel */
+        .screenshots-carousel {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .screenshots-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 400px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            scroll-snap-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-blue);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 60px var(--glow-blue);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .pricing-period {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 32px;
+            padding: 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--border-color);
+            z-index: 1;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            max-width: 300px;
+        }
+
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: block;
+            padding: 0.4rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 6rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-box {
+                padding: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-brand p {
+                max-width: none;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-cta .btn-ghost {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">O</div>
+                <span class="logo-text">OpsLab<span>Systems</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screenshots">Platform</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="#" class="btn btn-ghost">Sign In</a>
+                <a href="#" class="btn btn-primary">Get Started</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <span>Now Live — Version 2.0</span>
+            </div>
+            <h1 class="hero-title">
+                Staff Management<br>
+                <span class="gradient">Reimagined for Modern Teams</span>
+            </h1>
+            <p class="hero-subtitle">
+                Streamline scheduling, track leave, manage finances, and empower your workforce with our all-in-one cloud platform. Built for teams that move fast.
+            </p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary btn-large">Start Free Trial</a>
+                <a href="#screenshots" class="btn btn-outline btn-large">See it in Action →</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">99.9%</div>
+                    <div class="stat-label">Uptime Guaranteed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">50K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">4.9★</div>
+                    <div class="stat-label">User Rating</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Features</div>
+                <h2 class="section-title">Everything Your Team Needs</h2>
+                <p class="section-subtitle">
+                    A complete toolkit for managing your workforce, from scheduling to finance—all in one beautiful interface.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon blue">📊</div>
+                    <h3 class="feature-title">Intelligent Dashboard</h3>
+                    <p class="feature-desc">Get a bird's-eye view of your operations. Track shifts, tasks, leave balances, and notifications all from one unified command center.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon purple">📅</div>
+                    <h3 class="feature-title">Smart Scheduling</h3>
+                    <p class="feature-desc">Visual calendar with drag-and-drop scheduling. See work days, approved leave, and restricted periods at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon cyan">🏖️</div>
+                    <h3 class="feature-title">Leave Management</h3>
+                    <p class="feature-desc">Comprehensive leave tracking for annual, sick, personal, bereavement, and maternity leave. Automated balance calculations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon green">💰</div>
+                    <h3 class="feature-title">Finance Dashboard</h3>
+                    <p class="feature-desc">Track expenses, manage budgets, create invoices, and generate financial reports. Full oversight of your team's spending.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon pink">🔐</div>
+                    <h3 class="feature-title">Role-Based Access</h3>
+                    <p class="feature-desc">Granular permissions for Administrators, Managers, and Users. Control who sees what with 40+ permission settings.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon orange">⚙️</div>
+                    <h3 class="feature-title">Modular Design</h3>
+                    <p class="feature-desc">Enable only what you need. Toggle modules for Schedule, Leave, Tasks, Board, Finance, and Notifications on demand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="section screenshots-section" id="screenshots">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Platform Tour</div>
+                <h2 class="section-title">See the Platform in Action</h2>
+                <p class="section-subtitle">
+                    Explore our intuitive dark-themed interface designed for productivity and ease of use.
+                </p>
+            </div>
+            
+            <div class="screenshot-tabs">
+                <button class="screenshot-tab active" data-target="1">Dashboard</button>
+                <button class="screenshot-tab" data-target="3">Schedule</button>
+                <button class="screenshot-tab" data-target="4">Leave</button>
+                <button class="screenshot-tab" data-target="5">Finance</button>
+                <button class="screenshot-tab" data-target="6">Expenses</button>
+                <button class="screenshot-tab" data-target="7">Roles</button>
+                <button class="screenshot-tab" data-target="8">Settings</button>
+            </div>
+            
+            <div class="screenshot-display">
+                <img src="images/1.png" alt="Dashboard" class="screenshot-img" data-img="1">
+                <img src="images/3.png" alt="Schedule" class="screenshot-img hidden" data-img="3">
+                <img src="images/4.png" alt="Leave Management" class="screenshot-img hidden" data-img="4">
+                <img src="images/5.png" alt="Finance Dashboard" class="screenshot-img hidden" data-img="5">
+                <img src="images/6.png" alt="Expenses" class="screenshot-img hidden" data-img="6">
+                <img src="images/7.png" alt="Role Management" class="screenshot-img hidden" data-img="7">
+                <img src="images/8.png" alt="Site Settings" class="screenshot-img hidden" data-img="8">
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Pricing</div>
+                <h2 class="section-title">Simple, Transparent Pricing</h2>
+                <p class="section-subtitle">
+                    Start free, scale as you grow. No hidden fees, no surprises.
+                </p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Starter</div>
+                    <div class="pricing-desc">Perfect for small teams</div>
+                    <div class="pricing-price">£0 <span>/ month</span></div>
+                    <div class="pricing-period">Up to 5 users</div>
+                    <ul class="pricing-features">
+                        <li>Basic scheduling</li>
+                        <li>Leave management</li>
+                        <li>Dashboard access</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Get Started Free</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-name">Professional</div>
+                    <div class="pricing-desc">For growing organizations</div>
+                    <div class="pricing-price">£29 <span>/ month</span></div>
+                    <div class="pricing-period">Up to 50 users</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Starter</li>
+                        <li>Finance dashboard</li>
+                        <li>Expense tracking</li>
+                        <li>Role management</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Start Free Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">Enterprise</div>
+                    <div class="pricing-desc">For large organizations</div>
+                    <div class="pricing-price">Custom</div>
+                    <div class="pricing-period">Unlimited users</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Pro</li>
+                        <li>Custom integrations</li>
+                        <li>Dedicated support</li>
+                        <li>SLA guarantee</li>
+                        <li>On-premise option</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section" id="contact">
+        <div class="section-container">
+            <div class="cta-box">
+                <h2 class="cta-title">Ready to Transform Your Workforce Management?</h2>
+                <p class="cta-subtitle">Join thousands of teams already using OpsLabSystems to streamline their operations.</p>
+                <div class="hero-buttons" style="justify-content: center;">
+                    <a href="#" class="btn btn-primary btn-large">Start Your Free Trial</a>
+                    <a href="#" class="btn btn-outline btn-large">Schedule a Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">O</div>
+                        <span class="logo-text">OpsLab<span>Systems</span></span>
+                    </a>
+                    <p>Modern staff management for modern teams. Built in the cloud, designed for scale.</p>
+                </div>
+                <div>
+                    <div class="footer-title">Product</div>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">Company</div>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">Legal</div>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 OpsLabSystems.cloud. All rights reserved.</span>
+                <div class="social-links">
+                    <a href="#" title="Twitter">𝕏</a>
+                    <a href="#" title="LinkedIn">in</a>
+                    <a href="#" title="GitHub">⌘</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Screenshot tabs functionality
+        const tabs = document.querySelectorAll('.screenshot-tab');
+        const images = document.querySelectorAll('.screenshot-img');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.target;
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show correct image
+                images.forEach(img => {
+                    if (img.dataset.img === target) {
+                        img.classList.remove('hidden');
+                    } else {
+                        img.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(10, 10, 15, 0.95)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 15, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
