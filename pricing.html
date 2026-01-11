@@ -1113,15 +1113,18 @@
         let selectedFeatures = new Set();
 
         featureItems.forEach(item => {
-            item.addEventListener('click', () => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            
+            // Use change event on checkbox instead of click on label
+            checkbox.addEventListener('change', () => {
                 const feature = item.dataset.feature;
                 
-                if (selectedFeatures.has(feature)) {
-                    selectedFeatures.delete(feature);
-                    item.classList.remove('selected');
-                } else {
+                if (checkbox.checked) {
                     selectedFeatures.add(feature);
                     item.classList.add('selected');
+                } else {
+                    selectedFeatures.delete(feature);
+                    item.classList.remove('selected');
                 }
                 
                 updateCustomSummary();
