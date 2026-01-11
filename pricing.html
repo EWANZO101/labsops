@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Package | OpsLabSystems.cloud</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --bg-card-hover: #22222e;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-pink: #ec4899;
+            --accent-orange: #f97316;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(255,255,255,0.08);
+            --border-active: rgba(59, 130, 246, 0.5);
+            --glow-blue: rgba(59, 130, 246, 0.4);
+            --glow-purple: rgba(139, 92, 246, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -200px;
+            right: -100px;
+            background: var(--accent-blue);
+        }
+
+        .bg-glow-2 {
+            bottom: -200px;
+            left: -100px;
+            background: var(--accent-purple);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px var(--glow-blue);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+        }
+
+        .logo-text span {
+            color: var(--accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            box-shadow: 0 4px 20px var(--glow-blue);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--glow-blue);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            padding: 8rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Configurator Layout */
+        .configurator {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .configurator {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Selection Panel */
+        .selection-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .config-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .config-section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .config-section-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* License Duration Options */
+        .duration-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .duration-option {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .duration-option:hover {
+            border-color: var(--border-active);
+            background: var(--bg-card-hover);
+        }
+
+        .duration-option.selected {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .duration-option input {
+            display: none;
+        }
+
+        .duration-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .duration-price {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+        }
+
+        /* Feature Options */
+        .feature-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .feature-option {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .feature-option:hover {
+            border-color: var(--border-active);
+            background: var(--bg-card-hover);
+        }
+
+        .feature-option.selected {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .feature-option.included {
+            border-color: var(--border-color);
+            background: var(--bg-secondary);
+            opacity: 0.7;
+            cursor: default;
+        }
+
+        .feature-option input {
+            display: none;
+        }
+
+        .feature-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-icon.blue { background: rgba(59, 130, 246, 0.15); }
+        .feature-icon.purple { background: rgba(139, 92, 246, 0.15); }
+        .feature-icon.cyan { background: rgba(6, 182, 212, 0.15); }
+        .feature-icon.green { background: rgba(16, 185, 129, 0.15); }
+        .feature-icon.pink { background: rgba(236, 72, 153, 0.15); }
+        .feature-icon.orange { background: rgba(249, 115, 22, 0.15); }
+
+        .feature-details h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .feature-details p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .feature-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .feature-price.included-tag {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .feature-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .feature-option.selected .feature-check {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .feature-option.included .feature-check {
+            background: var(--text-muted);
+            border-color: var(--text-muted);
+        }
+
+        .feature-check::after {
+            content: '✓';
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .feature-option.selected .feature-check::after,
+        .feature-option.included .feature-check::after {
+            opacity: 1;
+        }
+
+        /* Summary Panel */
+        .summary-panel {
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2rem;
+        }
+
+        .summary-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .summary-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .summary-item-name {
+            color: var(--text-secondary);
+        }
+
+        .summary-item-price {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+        }
+
+        .summary-item.discount .summary-item-price {
+            color: var(--accent-green);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-total-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-total-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .summary-total-period {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: right;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .summary-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .summary-panel {
+                position: relative;
+                top: 0;
+            }
+
+            .duration-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">O</div>
+                <span class="logo-text">OpsLab<span>Systems</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#screenshots">Platform</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        
+        <div class="page-header">
+            <div class="page-label">Build Your Package</div>
+            <h1 class="page-title">Customize Your License</h1>
+            <p class="page-subtitle">
+                Select your license duration and choose the features you need. Pay only for what you use.
+            </p>
+        </div>
+
+        <div class="configurator">
+            <!-- Selection Panel -->
+            <div class="selection-panel">
+                <!-- License Duration -->
+                <div class="config-section">
+                    <h3 class="config-section-title">📅 License Duration</h3>
+                    <p class="config-section-desc">Choose how long you want access to the software</p>
+                    <div class="duration-options">
+                        <label class="duration-option" data-duration="monthly" data-base="4.99">
+                            <input type="radio" name="duration" value="monthly">
+                            <div class="duration-name">Monthly</div>
+                            <div class="duration-price">£4.99/mo</div>
+                        </label>
+                        <label class="duration-option" data-duration="30day" data-base="9.99">
+                            <input type="radio" name="duration" value="30day">
+                            <div class="duration-name">30 Days</div>
+                            <div class="duration-price">£9.99</div>
+                        </label>
+                        <label class="duration-option" data-duration="90day" data-base="24.99">
+                            <input type="radio" name="duration" value="90day">
+                            <div class="duration-name">90 Days</div>
+                            <div class="duration-price">£24.99</div>
+                        </label>
+                        <label class="duration-option selected" data-duration="1year" data-base="79.99">
+                            <input type="radio" name="duration" value="1year" checked>
+                            <div class="duration-name">1 Year</div>
+                            <div class="duration-price">£79.99</div>
+                        </label>
+                        <label class="duration-option" data-duration="lifetime" data-base="199.99">
+                            <input type="radio" name="duration" value="lifetime">
+                            <div class="duration-name">Lifetime</div>
+                            <div class="duration-price">£199.99</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Core Features (Included) -->
+                <div class="config-section">
+                    <h3 class="config-section-title">✅ Core Features (Included)</h3>
+                    <p class="config-section-desc">These features are included with every license</p>
+                    <div class="feature-options">
+                        <div class="feature-option included">
+                            <div class="feature-info">
+                                <div class="feature-icon blue">📊</div>
+                                <div class="feature-details">
+                                    <h4>Dashboard</h4>
+                                    <p>Central command center for all operations</p>
+                                </div>
+                            </div>
+                            <div class="feature-check"></div>
+                        </div>
+                        <div class="feature-option included">
+                            <div class="feature-info">
+                                <div class="feature-icon purple">👤</div>
+                                <div class="feature-details">
+                                    <h4>User Management</h4>
+                                    <p>Add and manage team members</p>
+                                </div>
+                            </div>
+                            <div class="feature-check"></div>
+                        </div>
+                        <div class="feature-option included">
+                            <div class="feature-info">
+                                <div class="feature-icon cyan">🔔</div>
+                                <div class="feature-details">
+                                    <h4>Notifications</h4>
+                                    <p>Real-time alerts and updates</p>
+                                </div>
+                            </div>
+                            <div class="feature-check"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add-on Features -->
+                <div class="config-section">
+                    <h3 class="config-section-title">➕ Add-on Features</h3>
+                    <p class="config-section-desc">Select additional modules to customize your package</p>
+                    <div class="feature-options">
+                        <label class="feature-option" data-feature="scheduling" data-price="14.99">
+                            <input type="checkbox" name="feature" value="scheduling">
+                            <div class="feature-info">
+                                <div class="feature-icon green">📅</div>
+                                <div class="feature-details">
+                                    <h4>Scheduling Module</h4>
+                                    <p>Staff scheduling, shift management, calendar view</p>
+                                </div>
+                            </div>
+                            <div class="feature-price">+£14.99</div>
+                            <div class="feature-check"></div>
+                        </label>
+                        <label class="feature-option" data-feature="leave" data-price="12.99">
+                            <input type="checkbox" name="feature" value="leave">
+                            <div class="feature-info">
+                                <div class="feature-icon pink">🏖️</div>
+                                <div class="feature-details">
+                                    <h4>Leave Management</h4>
+                                    <p>Time off requests, leave balances, approvals</p>
+                                </div>
+                            </div>
+                            <div class="feature-price">+£12.99</div>
+                            <div class="feature-check"></div>
+                        </label>
+                        <label class="feature-option" data-feature="finance" data-price="19.99">
+                            <input type="checkbox" name="feature" value="finance">
+                            <div class="feature-info">
+                                <div class="feature-icon orange">💰</div>
+                                <div class="feature-details">
+                                    <h4>Finance Dashboard</h4>
+                                    <p>Budgets, invoices, financial reports</p>
+                                </div>
+                            </div>
+                            <div class="feature-price">+£19.99</div>
+                            <div class="feature-check"></div>
+                        </label>
+                        <label class="feature-option" data-feature="expenses" data-price="9.99">
+                            <input type="checkbox" name="feature" value="expenses">
+                            <div class="feature-info">
+                                <div class="feature-icon cyan">🧾</div>
+                                <div class="feature-details">
+                                    <h4>Expense Tracking</h4>
+                                    <p>Submit and manage expense claims</p>
+                                </div>
+                            </div>
+                            <div class="feature-price">+£9.99</div>
+                            <div class="feature-check"></div>
+                        </label>
+                        <label class="feature-option" data-feature="tasks" data-price="8.99">
+                            <input type="checkbox" name="feature" value="tasks">
+                            <div class="feature-info">
+                                <div class="feature-icon blue">✅</div>
+                                <div class="feature-details">
+                                    <h4>Task Management</h4>
+                                    <p>Assign and track tasks for your team</p>
+                                </div>
+                            </div>
+                            <div class="feature-price">+£8.99</div>
+                            <div class="feature-check"></div>
+                        </label>
+                        <label class="feature-option" data-feature="board" data-price="6.99">
+                            <input type="checkbox" name="feature" value="board">
+                            <div class="feature-info">
+                                <div class="feature-icon purple">📋</div>
+                                <div class="feature-details">
+                                    <h4>Announcement Board</h4>
+                                    <p>Company-wide announcements and updates</p>
+                                </div>
+                            </div>
+                            <div class="feature-price">+£6.99</div>
+                            <div class="feature-check"></div>
+                        </label>
+                        <label class="feature-option" data-feature="roles" data-price="11.99">
+                            <input type="checkbox" name="feature" value="roles">
+                            <div class="feature-info">
+                                <div class="feature-icon green">🔐</div>
+                                <div class="feature-details">
+                                    <h4>Advanced Roles & Permissions</h4>
+                                    <p>Custom roles with granular permissions</p>
+                                </div>
+                            </div>
+                            <div class="feature-price">+£11.99</div>
+                            <div class="feature-check"></div>
+                        </label>
+                        <label class="feature-option" data-feature="reports" data-price="14.99">
+                            <input type="checkbox" name="feature" value="reports">
+                            <div class="feature-info">
+                                <div class="feature-icon orange">📈</div>
+                                <div class="feature-details">
+                                    <h4>Advanced Reports</h4>
+                                    <p>Detailed analytics and exportable reports</p>
+                                </div>
+                            </div>
+                            <div class="feature-price">+£14.99</div>
+                            <div class="feature-check"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Bundle Discount -->
+                <div class="config-section" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1)); border-color: rgba(16, 185, 129, 0.3);">
+                    <h3 class="config-section-title">🎁 Bundle Deal</h3>
+                    <p class="config-section-desc">Select 5 or more add-ons and get 20% off all add-on features!</p>
+                </div>
+            </div>
+
+            <!-- Summary Panel -->
+            <div class="summary-panel">
+                <div class="summary-card">
+                    <h3 class="summary-title">🛒 Your Package</h3>
+                    
+                    <div class="summary-items" id="summary-items">
+                        <div class="empty-state">Select a license duration to start</div>
+                    </div>
+
+                    <div class="summary-total">
+                        <span class="summary-total-label">Total</span>
+                        <span class="summary-total-price" id="total-price">£0.00</span>
+                    </div>
+                    <div class="summary-total-period" id="total-period"></div>
+
+                    <button class="btn btn-primary summary-btn" id="checkout-btn" disabled>
+                        Get License Key
+                    </button>
+                    <p class="summary-note">Instant delivery via email</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Pricing data
+        const durations = {
+            monthly: { name: 'Monthly License', base: 4.99, period: 'per month' },
+            '30day': { name: '30 Day License', base: 9.99, period: 'one-time' },
+            '90day': { name: '90 Day License', base: 24.99, period: 'one-time' },
+            '1year': { name: '1 Year License', base: 79.99, period: 'one-time' },
+            lifetime: { name: 'Lifetime License', base: 199.99, period: 'one-time' }
+        };
+
+        const features = {
+            scheduling: { name: 'Scheduling Module', price: 14.99 },
+            leave: { name: 'Leave Management', price: 12.99 },
+            finance: { name: 'Finance Dashboard', price: 19.99 },
+            expenses: { name: 'Expense Tracking', price: 9.99 },
+            tasks: { name: 'Task Management', price: 8.99 },
+            board: { name: 'Announcement Board', price: 6.99 },
+            roles: { name: 'Advanced Roles', price: 11.99 },
+            reports: { name: 'Advanced Reports', price: 14.99 }
+        };
+
+        // State
+        let selectedDuration = '1year';
+        let selectedFeatures = new Set();
+
+        // DOM elements
+        const durationOptions = document.querySelectorAll('.duration-option');
+        const featureOptions = document.querySelectorAll('.feature-option:not(.included)');
+        const summaryItems = document.getElementById('summary-items');
+        const totalPrice = document.getElementById('total-price');
+        const totalPeriod = document.getElementById('total-period');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        // Event listeners
+        durationOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                durationOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedDuration = option.dataset.duration;
+                updateSummary();
+            });
+        });
+
+        featureOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const feature = option.dataset.feature;
+                if (selectedFeatures.has(feature)) {
+                    selectedFeatures.delete(feature);
+                    option.classList.remove('selected');
+                } else {
+                    selectedFeatures.add(feature);
+                    option.classList.add('selected');
+                }
+                updateSummary();
+            });
+        });
+
+        // Update summary
+        function updateSummary() {
+            const duration = durations[selectedDuration];
+            let html = '';
+            let total = 0;
+            let addOnTotal = 0;
+
+            // Add duration
+            if (duration) {
+                html += `
+                    <div class="summary-item">
+                        <span class="summary-item-name">${duration.name}</span>
+                        <span class="summary-item-price">£${duration.base.toFixed(2)}</span>
+                    </div>
+                `;
+                total += duration.base;
+            }
+
+            // Add features
+            selectedFeatures.forEach(featureKey => {
+                const feature = features[featureKey];
+                html += `
+                    <div class="summary-item">
+                        <span class="summary-item-name">${feature.name}</span>
+                        <span class="summary-item-price">£${feature.price.toFixed(2)}</span>
+                    </div>
+                `;
+                addOnTotal += feature.price;
+            });
+
+            // Apply bundle discount (5+ features = 20% off add-ons)
+            let discount = 0;
+            if (selectedFeatures.size >= 5) {
+                discount = addOnTotal * 0.2;
+                html += `
+                    <div class="summary-item discount">
+                        <span class="summary-item-name">Bundle Discount (20%)</span>
+                        <span class="summary-item-price">-£${discount.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+
+            total += addOnTotal - discount;
+
+            if (html === '') {
+                summaryItems.innerHTML = '<div class="empty-state">Select a license duration to start</div>';
+            } else {
+                summaryItems.innerHTML = html;
+            }
+
+            totalPrice.textContent = `£${total.toFixed(2)}`;
+            totalPeriod.textContent = duration ? duration.period : '';
+            checkoutBtn.disabled = !duration;
+        }
+
+        // Initial update
+        updateSummary();
+    </script>
+</body>
+</html>
