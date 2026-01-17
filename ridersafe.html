@@ -173,17 +173,6 @@
             color: var(--text-primary);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            box-shadow: 0 4px 20px var(--glow-blue);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--glow-blue);
-        }
-
         .btn-outline {
             background: transparent;
             color: var(--text-primary);
@@ -489,6 +478,185 @@
             margin: 0 auto;
         }
 
+        /* What Is Section */
+        .what-is-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .what-is-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .what-is-content h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .what-is-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .what-is-content p strong {
+            color: var(--text-primary);
+        }
+
+        .what-is-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: rgba(249, 115, 22, 0.3);
+            transform: translateX(8px);
+        }
+
+        .info-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(249, 115, 22, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .info-card-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Why Use Section */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .why-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .why-card:hover {
+            border-color: rgba(249, 115, 22, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .why-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .why-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .why-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Scenario Section */
+        .scenario-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .scenario-card {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(239, 68, 68, 0.08));
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scenario-icon {
+            font-size: 2.5rem;
+        }
+
+        .scenario-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .scenario-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .scenario-content {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .scenario-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-content .highlight-text {
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        .scenario-content .outcome {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .scenario-content .outcome strong {
+            color: var(--accent-green);
+        }
+
         /* Features Grid */
         .features-section {
             background: var(--bg-secondary);
@@ -498,7 +666,7 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
@@ -554,7 +722,7 @@
         .feature-icon.yellow { background: rgba(234, 179, 8, 0.15); }
 
         .feature-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
         }
@@ -615,38 +783,45 @@
         .step-desc {
             color: var(--text-secondary);
             font-size: 0.95rem;
+            line-height: 1.7;
         }
 
-        /* Tech Stack */
-        .tech-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        /* Who Is It For */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        .tech-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 1.5rem;
+        .audience-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
             transition: all 0.3s ease;
         }
 
-        .tech-item:hover {
-            border-color: var(--accent-orange);
-            transform: translateY(-3px);
+        .audience-card:hover {
+            border-color: rgba(249, 115, 22, 0.3);
+            transform: translateY(-5px);
         }
 
-        .tech-icon {
-            font-size: 1.5rem;
+        .audience-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        .tech-name {
-            font-weight: 500;
+        .audience-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .audience-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
         /* CTA Section */
@@ -678,6 +853,7 @@
             color: var(--text-secondary);
             font-size: 1.1rem;
             margin-bottom: 2rem;
+            line-height: 1.8;
         }
 
         .cta-buttons {
@@ -801,6 +977,10 @@
                 justify-content: center;
             }
             
+            .what-is-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
@@ -819,7 +999,19 @@
                 grid-template-columns: 1fr;
             }
             
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .cta-box {
+                padding: 2rem;
+            }
+            
+            .scenario-card {
                 padding: 2rem;
             }
             
@@ -856,8 +1048,9 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="#what-is">What Is It</a></li>
+                <li><a href="#why-use">Why Use It</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="nav-cta">
@@ -873,7 +1066,7 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <span>Mobile-First PWA • Flask + TailwindCSS</span>
+                    <span>Free Safety App for Motorcycle Riders</span>
                 </div>
                 <div class="hero-logo">
                     <div class="hero-logo-icon">🏍️</div>
@@ -884,11 +1077,11 @@
                     <span class="highlight">Stay Safe</span>
                 </h1>
                 <p class="hero-subtitle">
-                    A fast, mobile-first web application designed for motorcycle riders to safely store and share emergency contact information within trusted riding groups. Because when you're out on the road, every second counts.
+                    A simple app that helps motorcycle riders look out for each other. Store your emergency contacts, share your location with your riding mates, and get help faster if something goes wrong.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#cta" class="btn btn-orange btn-large">Join Waitlist →</a>
-                    <a href="#features" class="btn btn-outline btn-large">See Features</a>
+                    <a href="#cta" class="btn btn-orange btn-large">Join the Waitlist →</a>
+                    <a href="#what-is" class="btn btn-outline btn-large">Learn More</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -911,7 +1104,7 @@
                                 <div class="phone-card">
                                     <div class="phone-card-icon green">📞</div>
                                     <div class="phone-card-content">
-                                        <div class="phone-card-title">ICE Contacts</div>
+                                        <div class="phone-card-title">Emergency Contacts</div>
                                         <div class="phone-card-subtitle">2 contacts saved</div>
                                     </div>
                                 </div>
@@ -933,64 +1126,246 @@
         </div>
     </section>
 
+    <!-- What Is RIDERSAFE Section -->
+    <section class="section what-is-section" id="what-is">
+        <div class="section-container">
+            <div class="what-is-grid">
+                <div class="what-is-content">
+                    <h2>What is RIDERSAFE?</h2>
+                    <p>
+                        <strong>RIDERSAFE is a free app that helps keep you and your riding mates safe when you're out on the road.</strong>
+                    </p>
+                    <p>
+                        Think about it — when you're riding with a group, what happens if someone comes off their bike on a quiet back road? How do the others know who to call? Where exactly did it happen? Precious minutes can be lost trying to figure this out.
+                    </p>
+                    <p>
+                        RIDERSAFE solves this. It's like a safety net for your riding group. Everyone's emergency contacts are stored and accessible, you can see where everyone is in real-time, and if the worst happens, one tap sends an alert with your exact location to everyone in your group.
+                    </p>
+                    <p>
+                        <strong>No complicated setup. No monthly fees. Just peace of mind every time you throw a leg over.</strong>
+                    </p>
+                </div>
+                <div class="what-is-visual">
+                    <div class="info-card">
+                        <div class="info-card-icon">🏍️</div>
+                        <div class="info-card-content">
+                            <h4>Made for Real Riders</h4>
+                            <p>Built by bikers who understand that when you're out on a ride, you need something that works fast and simple.</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon">📱</div>
+                        <div class="info-card-content">
+                            <h4>Works on Any Phone</h4>
+                            <p>No app store needed. Just open it in your browser and add it to your home screen. Works on iPhone, Android, anything.</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon">🔒</div>
+                        <div class="info-card-content">
+                            <h4>Your Data Stays Private</h4>
+                            <p>Only people in your riding group can see your information. We don't sell your data or share it with anyone.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Use RIDERSAFE Section -->
+    <section class="section" id="why-use">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Why Use It</div>
+                <h2 class="section-title">Why Riders Choose RIDERSAFE</h2>
+                <p class="section-subtitle">
+                    Because looking out for your mates shouldn't be complicated.
+                </p>
+            </div>
+            
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-card-icon">⏱️</div>
+                    <h3>Every Second Counts</h3>
+                    <p>In an emergency, you don't want to be fumbling through someone's phone trying to find their mum's number. With RIDERSAFE, anyone in your group can instantly see emergency contacts and call them with one tap. No searching, no guessing.</p>
+                </div>
+                
+                <div class="why-card">
+                    <div class="why-card-icon">🗺️</div>
+                    <h3>Know Where Everyone Is</h3>
+                    <p>Ever lost sight of a mate on a group ride? Or wondered if that rider who pulled over is okay? Live location sharing means you always know where your group is. And if someone's stopped for too long, you'll know something might be wrong.</p>
+                </div>
+                
+                <div class="why-card">
+                    <div class="why-card-icon">🚨</div>
+                    <h3>Get Help Faster</h3>
+                    <p>If you come off, one button sends your exact GPS location to everyone in your group. They'll know precisely where you are — not "somewhere on that country road" but the exact spot. That can mean the difference between waiting 5 minutes and waiting an hour.</p>
+                </div>
+                
+                <div class="why-card">
+                    <div class="why-card-icon">👥</div>
+                    <h3>Perfect for Group Rides</h3>
+                    <p>Whether it's your Sunday morning coffee run with a few mates or a big club ride with 50 bikes, RIDERSAFE scales to fit. Create a group, share the invite code, and everyone's connected. Simple as that.</p>
+                </div>
+                
+                <div class="why-card">
+                    <div class="why-card-icon">💰</div>
+                    <h3>Completely Free</h3>
+                    <p>No subscriptions. No premium features locked behind a paywall. No ads. We built this because riders needed it, not to make money off you. Every feature is free for everyone.</p>
+                </div>
+                
+                <div class="why-card">
+                    <div class="why-card-icon">📵</div>
+                    <h3>Works Without Signal</h3>
+                    <p>Once you've loaded the app, your emergency contacts and group info are saved on your phone. Even if you lose mobile signal on a remote road, you've still got access to the important stuff.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real World Scenario -->
+    <section class="section scenario-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Real World</div>
+                <h2 class="section-title">Picture This...</h2>
+            </div>
+            
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <span class="scenario-icon">🛣️</span>
+                    <div>
+                        <div class="scenario-title">A Sunday Morning Ride</div>
+                        <div class="scenario-subtitle">How RIDERSAFE helps when it matters most</div>
+                    </div>
+                </div>
+                <div class="scenario-content">
+                    <p>
+                        You're out on a Sunday ride with five mates. Beautiful day, quiet country roads, everyone's having a great time. You're at the back of the group when you see Dave up ahead go wide on a corner. Gravel. He's down.
+                    </p>
+                    <p>
+                        <span class="highlight-text">Without RIDERSAFE:</span> Everyone stops. Someone's trying to call 999 but can't describe exactly where you are. Another mate is going through Dave's jacket looking for his phone to call his wife. Precious minutes tick by. The ambulance struggles to find you.
+                    </p>
+                    <p>
+                        <span class="highlight-text">With RIDERSAFE:</span> You open the app and tap "Rider Down." Instantly, everyone in your group gets an alert with Dave's exact GPS coordinates — a pin on a map they can share with emergency services. Someone else opens Dave's profile and calls his wife directly. You can even share his medical info with the paramedics when they arrive.
+                    </p>
+                    <div class="outcome">
+                        <strong>The outcome:</strong> Help arrives faster. Dave's family is contacted immediately. Everyone knows exactly what to do because it's all right there in the app. That's what RIDERSAFE is for — being prepared for the moments you hope never happen.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Is It For Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Who's It For</div>
+                <h2 class="section-title">RIDERSAFE is for Every Rider</h2>
+                <p class="section-subtitle">
+                    Whether you ride solo or in a pack, there's a place for you here.
+                </p>
+            </div>
+            
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <div class="audience-icon">👫</div>
+                    <h3 class="audience-title">Mates Who Ride Together</h3>
+                    <p class="audience-desc">Got a regular group you ride with on weekends? Set up a group and you're sorted. Everyone's info in one place, ready if you need it.</p>
+                </div>
+                
+                <div class="audience-card">
+                    <div class="audience-icon">🏁</div>
+                    <h3 class="audience-title">Motorcycle Clubs</h3>
+                    <p class="audience-desc">Perfect for organised clubs and chapters. Keep all your members connected during rides, rallies, and events. No one gets left behind.</p>
+                </div>
+                
+                <div class="audience-card">
+                    <div class="audience-icon">🛤️</div>
+                    <h3 class="audience-title">Touring Riders</h3>
+                    <p class="audience-desc">Heading off on a long trip? Let your family track your location so they know you're safe. Share your journey without constant check-in calls.</p>
+                </div>
+                
+                <div class="audience-card">
+                    <div class="audience-icon">👤</div>
+                    <h3 class="audience-title">Solo Riders</h3>
+                    <p class="audience-desc">Even if you prefer riding alone, your family can be in your "group." They'll have peace of mind knowing where you are and how to help if needed.</p>
+                </div>
+                
+                <div class="audience-card">
+                    <div class="audience-icon">🎓</div>
+                    <h3 class="audience-title">Training Groups</h3>
+                    <p class="audience-desc">Instructors and training schools can keep tabs on learners during road rides. Know where everyone is and respond quickly if someone needs help.</p>
+                </div>
+                
+                <div class="audience-card">
+                    <div class="audience-icon">💑</div>
+                    <h3 class="audience-title">Couples Who Ride</h3>
+                    <p class="audience-desc">Ride with your partner? Stay connected even when you're on separate bikes. See where each other are and have quick access to emergency info.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section class="section features-section" id="features">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">Features</div>
-                <h2 class="section-title">Built for Riders, by Riders</h2>
+                <h2 class="section-title">Everything You Need, Nothing You Don't</h2>
                 <p class="section-subtitle">
-                    Every feature designed with real-world motorcycle safety in mind.
+                    Simple tools that work when you need them most.
                 </p>
             </div>
             
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon orange">🔒</div>
-                    <h3 class="feature-title">Secure Group-Based Access</h3>
-                    <p class="feature-desc">Create private riding groups with unique invite links and codes. Only trusted members can see your information and location.</p>
+                    <h3 class="feature-title">Private Riding Groups</h3>
+                    <p class="feature-desc">Create a group for your mates and share an invite code. Only people you invite can join. Your info stays between you and your group.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon blue">👤</div>
-                    <h3 class="feature-title">Individual User Accounts</h3>
-                    <p class="feature-desc">Each rider has their own profile within the group. Manage your emergency contacts, medical info, and bike details privately.</p>
+                    <h3 class="feature-title">Personal Profiles</h3>
+                    <p class="feature-desc">Each rider has their own profile with emergency contacts, medical notes, and bike details. Update it anytime from your phone.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon green">📞</div>
-                    <h3 class="feature-title">Emergency Contacts (ICE)</h3>
-                    <p class="feature-desc">Store In Case of Emergency contacts with one-tap calling. First responders can quickly reach your loved ones when it matters most.</p>
+                    <h3 class="feature-title">One-Tap Emergency Calls</h3>
+                    <p class="feature-desc">See a mate's emergency contact? Tap it and your phone calls them straight away. No copying numbers, no delays.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon cyan">📍</div>
-                    <h3 class="feature-title">Live GPS Location</h3>
-                    <p class="feature-desc">Share your real-time location with group members. Know where everyone is on group rides and get help faster in emergencies.</p>
+                    <h3 class="feature-title">Live Location Sharing</h3>
+                    <p class="feature-desc">Turn it on during rides so your group can see where everyone is on a map. Great for keeping the group together or spotting someone in trouble.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon red">🚨</div>
-                    <h3 class="feature-title">Rider Down Alerts</h3>
-                    <p class="feature-desc">Trigger instant emergency alerts that share your exact GPS location with all group members. Help arrives faster when seconds count.</p>
+                    <h3 class="feature-title">Rider Down Alert</h3>
+                    <p class="feature-desc">One big button. Press it and everyone in your group gets your exact location instantly. They'll know where you are and that you need help.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon purple">📱</div>
-                    <h3 class="feature-title">PWA Support</h3>
-                    <p class="feature-desc">Install directly on iPhone or Android home screen. Works offline so you're never without access to critical safety information.</p>
+                    <h3 class="feature-title">Works Like an App</h3>
+                    <p class="feature-desc">Add it to your home screen and it looks and feels like a regular app. Open it instantly without faffing about in a browser.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon yellow">🌙</div>
-                    <h3 class="feature-title">Dark Theme UI</h3>
-                    <p class="feature-desc">Clean, modern interface built with Flowbite & TailwindCSS. Easy to read day or night, with high contrast for quick access.</p>
+                    <h3 class="feature-title">Easy on the Eyes</h3>
+                    <p class="feature-desc">Dark theme that's easy to read whether you're in bright sunlight or checking it at night. Clean design, no clutter.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon green">⚡</div>
-                    <h3 class="feature-title">Lightning Fast</h3>
-                    <p class="feature-desc">Optimized for mobile networks. Even with spotty reception on rural roads, RIDERSAFE responds instantly when you need it.</p>
+                    <h3 class="feature-title">Works Offline</h3>
+                    <p class="feature-desc">Your emergency contacts and group info are saved on your phone. Even without signal, you can still see the important stuff.</p>
                 </div>
             </div>
         </div>
@@ -1000,10 +1375,10 @@
     <section class="section" id="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <div class="section-label">How It Works</div>
-                <h2 class="section-title">Get Started in Minutes</h2>
+                <div class="section-label">Getting Started</div>
+                <h2 class="section-title">Up and Running in 5 Minutes</h2>
                 <p class="section-subtitle">
-                    Simple setup, powerful protection for every ride.
+                    No complicated setup. No tech knowledge needed.
                 </p>
             </div>
             
@@ -1011,65 +1386,25 @@
                 <div class="step-card">
                     <div class="step-icon">👥</div>
                     <h3 class="step-title">Create or Join a Group</h3>
-                    <p class="step-desc">Start a new riding group or join an existing one with an invite code. Perfect for clubs, friends, or regular riding buddies.</p>
+                    <p class="step-desc">Start a new group for your mates, or join an existing one with a code someone's shared with you. Takes about 30 seconds.</p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-icon">📝</div>
-                    <h3 class="step-title">Set Up Your Profile</h3>
-                    <p class="step-desc">Add your emergency contacts, medical information, and bike details. This info is only shared with group members.</p>
+                    <h3 class="step-title">Add Your Details</h3>
+                    <p class="step-desc">Pop in your emergency contacts — partner, parent, whoever you'd want called if something happened. Add any medical info that could help.</p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-icon">📱</div>
-                    <h3 class="step-title">Install the PWA</h3>
-                    <p class="step-desc">Add RIDERSAFE to your home screen for instant access. Works offline so you're covered even without signal.</p>
+                    <h3 class="step-title">Add to Home Screen</h3>
+                    <p class="step-desc">Your phone will ask if you want to add RIDERSAFE to your home screen. Say yes. Now it's right there ready whenever you need it.</p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-icon">🛣️</div>
                     <h3 class="step-title">Ride with Confidence</h3>
-                    <p class="step-desc">Enable live location for group rides. In an emergency, one tap sends your location to everyone who can help.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack -->
-    <section class="section features-section">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-label">Built With</div>
-                <h2 class="section-title">Modern, Reliable Tech Stack</h2>
-                <p class="section-subtitle">
-                    Enterprise-grade technology ensuring your data is always safe and accessible.
-                </p>
-            </div>
-            
-            <div class="tech-grid">
-                <div class="tech-item">
-                    <span class="tech-icon">🐍</span>
-                    <span class="tech-name">Python Flask</span>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-icon">🎨</span>
-                    <span class="tech-name">TailwindCSS</span>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-icon">💎</span>
-                    <span class="tech-name">Flowbite</span>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-icon">📱</span>
-                    <span class="tech-name">PWA</span>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-icon">🗺️</span>
-                    <span class="tech-name">Geolocation API</span>
-                </div>
-                <div class="tech-item">
-                    <span class="tech-icon">🔐</span>
-                    <span class="tech-name">Secure Auth</span>
+                    <p class="step-desc">That's it. Turn on location sharing when you head out, and you're covered. Your mates can find you, and you can find them.</p>
                 </div>
             </div>
         </div>
@@ -1082,10 +1417,10 @@
                 <div class="cta-icon">🏍️</div>
                 <h2 class="cta-title">Ready to Ride Safer?</h2>
                 <p class="cta-subtitle">
-                    RIDERSAFE is currently in development. Join the waitlist to be notified when we launch and get early access.
+                    RIDERSAFE is currently being built and will be launching soon. Pop your email in and we'll let you know as soon as it's ready. You'll be among the first to try it — completely free.
                 </p>
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-orange btn-large">Join Waitlist</a>
+                    <a href="#" class="btn btn-orange btn-large">Join the Waitlist</a>
                     <a href="index.html#projects" class="btn btn-outline btn-large">View All Projects</a>
                 </div>
             </div>
@@ -1100,28 +1435,28 @@
                     <a href="index.html" class="logo">
                         <img src="pics/logo.png" alt="OpsLabSystems" class="logo-img">
                     </a>
-                    <p>Modern cloud software for modern teams. Building tools that make a difference.</p>
+                    <p>Building useful software for real people. No jargon, no nonsense — just tools that work.</p>
                 </div>
                 <div>
                     <div class="footer-title">RIDERSAFE</div>
                     <ul class="footer-links">
+                        <li><a href="#what-is">What Is It</a></li>
+                        <li><a href="#why-use">Why Use It</a></li>
                         <li><a href="#features">Features</a></li>
-                        <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">API</a></li>
+                        <li><a href="#how-it-works">Getting Started</a></li>
                     </ul>
                 </div>
                 <div>
                     <div class="footer-title">Company</div>
                     <ul class="footer-links">
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#projects">Our Projects</a></li>
                         <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Get in Touch</a></li>
                     </ul>
                 </div>
                 <div>
-                    <div class="footer-title">Legal</div>
+                    <div class="footer-title">Legal Stuff</div>
                     <ul class="footer-links">
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
