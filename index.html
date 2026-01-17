@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpsLabSystems.cloud | Modern Staff Management Platform</title>
+    <title>OpsLabSystems.cloud | Modern Software Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -17,12 +17,17 @@
             --accent-cyan: #06b6d4;
             --accent-green: #10b981;
             --accent-pink: #ec4899;
+            --accent-orange: #f97316;
+            --accent-red: #ef4444;
+            --accent-yellow: #eab308;
             --text-primary: #ffffff;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
             --border-color: rgba(255,255,255,0.08);
             --glow-blue: rgba(59, 130, 246, 0.4);
             --glow-purple: rgba(139, 92, 246, 0.4);
+            --glow-orange: rgba(249, 115, 22, 0.4);
+            --glow-red: rgba(239, 68, 68, 0.4);
         }
 
         * {
@@ -213,6 +218,17 @@
             border-color: var(--accent-blue);
         }
 
+        .btn-orange {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+            color: white;
+            box-shadow: 0 4px 20px var(--glow-orange);
+        }
+
+        .btn-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--glow-orange);
+        }
+
         /* Hero Section */
         .hero {
             position: relative;
@@ -370,6 +386,217 @@
             font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .project-card.staff-management:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 30px 60px rgba(59, 130, 246, 0.15);
+        }
+
+        .project-card.ridersafe:hover {
+            border-color: rgba(249, 115, 22, 0.4);
+            box-shadow: 0 30px 60px rgba(249, 115, 22, 0.15);
+        }
+
+        .project-header {
+            padding: 2rem 2rem 0;
+        }
+
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .project-badge.blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .project-badge.orange {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--accent-orange);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .project-badge.new {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .project-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .project-title-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .project-title-icon.blue {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            box-shadow: 0 4px 20px var(--glow-blue);
+        }
+
+        .project-title-icon.orange {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+            box-shadow: 0 4px 20px var(--glow-orange);
+        }
+
+        .project-tagline {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-feature-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.75rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .project-feature-tag .icon {
+            font-size: 0.9rem;
+        }
+
+        .project-preview {
+            position: relative;
+            margin-top: 1rem;
+            border-radius: 16px 16px 0 0;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .project-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 32px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
+        }
+
+        .project-preview::after {
+            content: '● ● ●';
+            position: absolute;
+            top: 9px;
+            left: 12px;
+            font-size: 8px;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            z-index: 11;
+        }
+
+        .project-preview img {
+            width: 100%;
+            display: block;
+            margin-top: 32px;
+        }
+
+        .project-actions {
+            padding: 1.5rem 2rem 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-actions .btn {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* RIDERSAFE Specific Styling */
+        .ridersafe-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            padding: 0 2rem 1rem;
+        }
+
+        .ridersafe-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 0.8rem;
+            background: rgba(249, 115, 22, 0.08);
+            border: 1px solid rgba(249, 115, 22, 0.15);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .ridersafe-feature:hover {
+            background: rgba(249, 115, 22, 0.15);
+            border-color: rgba(249, 115, 22, 0.3);
+            color: var(--text-primary);
+        }
+
+        .ridersafe-feature .icon {
+            font-size: 1rem;
         }
 
         /* Feature Cards */
@@ -782,6 +1009,10 @@
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -823,6 +1054,14 @@
             .nav-cta .btn-ghost {
                 display: none;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ridersafe-features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -838,14 +1077,15 @@
                 <img src="pics/logo.png" alt="OpsLabSystems" class="logo-img">
             </a>
             <ul class="nav-links">
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#screenshots">Platform</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="#contact">Contact</a></li>
-                 <li><a href="about.html">about</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
             <div class="nav-cta">
                 <a href="#" class="btn btn-ghost">Sign In</a>
-                <a href="pricing.html" class="btn btn-primary">Get License</a>
+                <a href="pricing.html" class="btn btn-primary">Get Started</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
         </div>
@@ -855,30 +1095,126 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-badge">
-                <span>Now Live — Version 2.0</span>
+                <span>Now Live — New Project: RIDERSAFE 🏍️</span>
             </div>
             <h1 class="hero-title">
-                Staff Management<br>
-                <span class="gradient">Reimagined for Modern Teams</span>
+                Cloud Software<br>
+                <span class="gradient">Built for Modern Teams</span>
             </h1>
             <p class="hero-subtitle">
-                Streamline scheduling, track leave, manage finances, and empower your workforce with our all-in-one cloud platform. Built for teams that move fast.
+                We build powerful cloud applications that solve real problems. From staff management to rider safety — our platforms are designed for teams that move fast.
             </p>
             <div class="hero-buttons">
-                <a href="pricing.html" class="btn btn-primary btn-large">Get License Key</a>
+                <a href="#projects" class="btn btn-primary btn-large">Explore Projects</a>
                 <a href="#screenshots" class="btn btn-outline btn-large">See it in Action →</a>
             </div>
-
         </div>
     </section>
 
+    <!-- Projects Section -->
+    <section class="section projects-section" id="projects">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Our Projects</div>
+                <h2 class="section-title">Powerful Solutions, Built Right</h2>
+                <p class="section-subtitle">
+                    Explore our suite of cloud applications designed to solve real-world problems.
+                </p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Staff Management Platform -->
+                <div class="project-card staff-management">
+                    <div class="project-header">
+                        <span class="project-badge blue">Enterprise</span>
+                        <span class="project-badge" style="background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.3);">v2.0</span>
+                        <h3 class="project-title">
+                            <span class="project-title-icon blue">📊</span>
+                            Staff Management
+                        </h3>
+                        <p class="project-tagline">Streamline scheduling, track leave, manage finances, and empower your workforce with our all-in-one cloud platform.</p>
+                        <div class="project-features">
+                            <span class="project-feature-tag"><span class="icon">📅</span> Scheduling</span>
+                            <span class="project-feature-tag"><span class="icon">🏖️</span> Leave Tracking</span>
+                            <span class="project-feature-tag"><span class="icon">💰</span> Finance</span>
+                            <span class="project-feature-tag"><span class="icon">👥</span> Roles</span>
+                            <span class="project-feature-tag"><span class="icon">⚙️</span> Settings</span>
+                            <span class="project-feature-tag"><span class="icon">🌙</span> Dark Mode</span>
+                        </div>
+                    </div>
+                    <div class="project-preview">
+                        <img src="pics/1.png" alt="Staff Management Dashboard">
+                    </div>
+                    <div class="project-actions">
+                        <a href="pricing.html" class="btn btn-primary">Get License</a>
+                        <a href="#screenshots" class="btn btn-outline">View Demo</a>
+                    </div>
+                </div>
 
+                <!-- RIDERSAFE -->
+                <div class="project-card ridersafe">
+                    <div class="project-header">
+                        <span class="project-badge orange">Mobile-First</span>
+                        <span class="project-badge new">New</span>
+                        <h3 class="project-title">
+                            <span class="project-title-icon orange">🏍️</span>
+                            RIDERSAFE
+                        </h3>
+                        <p class="project-tagline">A fast, mobile-first Flask web application designed for motorcycle riders to safely store and share emergency contact information within trusted riding groups.</p>
+                    </div>
+                    <div class="ridersafe-features-grid">
+                        <div class="ridersafe-feature">
+                            <span class="icon">🔒</span>
+                            <span>Secure Groups</span>
+                        </div>
+                        <div class="ridersafe-feature">
+                            <span class="icon">👤</span>
+                            <span>User Accounts</span>
+                        </div>
+                        <div class="ridersafe-feature">
+                            <span class="icon">📞</span>
+                            <span>ICE Contacts</span>
+                        </div>
+                        <div class="ridersafe-feature">
+                            <span class="icon">📍</span>
+                            <span>Live GPS</span>
+                        </div>
+                        <div class="ridersafe-feature">
+                            <span class="icon">🚨</span>
+                            <span>Rider Down</span>
+                        </div>
+                        <div class="ridersafe-feature">
+                            <span class="icon">📱</span>
+                            <span>PWA Support</span>
+                        </div>
+                        <div class="ridersafe-feature">
+                            <span class="icon">🌙</span>
+                            <span>Dark Theme</span>
+                        </div>
+                        <div class="ridersafe-feature">
+                            <span class="icon">⚡</span>
+                            <span>Works Offline</span>
+                        </div>
+                    </div>
+                    <div class="project-preview" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(239, 68, 68, 0.1)); padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; margin: 1rem; border-radius: 16px; border: 1px solid rgba(249, 115, 22, 0.2);">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🏍️</div>
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, var(--accent-orange), var(--accent-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">RIDERSAFE</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Ride Together, Stay Safe</div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="ridersafe.html" class="btn btn-orange">Learn More</a>
+                        <a href="#" class="btn btn-outline">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Screenshots Section -->
+    <!-- Screenshots Section (Staff Management) -->
     <section class="section screenshots-section" id="screenshots">
         <div class="section-container">
             <div class="section-header">
-                <div class="section-label">Platform Tour</div>
+                <div class="section-label">Staff Management Platform Tour</div>
                 <h2 class="section-title">See the Platform in Action</h2>
                 <p class="section-subtitle">
                     Explore our intuitive dark-themed interface designed for productivity and ease of use.
@@ -894,7 +1230,6 @@
                 <button class="screenshot-tab" data-target="6">Expenses</button>
                 <button class="screenshot-tab" data-target="7">Roles</button>
                 <button class="screenshot-tab" data-target="8">Settings</button>
-            
             </div>
             
             <div class="screenshot-display">
@@ -938,8 +1273,6 @@
         </div>
     </section>
 
-
-
     <!-- Footer -->
     <footer id="contact">
         <div class="footer-container">
@@ -948,13 +1281,13 @@
                     <a href="#" class="logo">
                         <img src="pics/logo.png" alt="OpsLabSystems" class="logo-img">
                     </a>
-                    <p>Modern staff management for modern teams. Built in the cloud, designed for scale.</p>
+                    <p>Modern cloud software for modern teams. Staff management, rider safety, and more — built in the cloud, designed for scale.</p>
                 </div>
                 <div>
-                    <div class="footer-title">Product</div>
+                    <div class="footer-title">Projects</div>
                     <ul class="footer-links">
-                        <li><a href="#screenshots">Platform</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="#screenshots">Staff Management</a></li>
+                        <li><a href="ridersafe.html">RIDERSAFE</a></li>
                         <li><a href="#">Documentation</a></li>
                         <li><a href="#">Changelog</a></li>
                     </ul>
@@ -962,7 +1295,7 @@
                 <div>
                     <div class="footer-title">Company</div>
                     <ul class="footer-links">
-                        <li><a href="#">About</a></li>
+                        <li><a href="about.html">About</a></li>
                         <li><a href="#">Blog</a></li>
                         <li><a href="#">Careers</a></li>
                         <li><a href="#">Contact</a></li>
